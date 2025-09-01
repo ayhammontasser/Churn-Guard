@@ -1,11 +1,40 @@
+# Virtual environment
 venv/
+.venv/
+
+# Python cache
 __pycache__/
-*.env
-*.log
-.DS_Store
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter notebooks checkpoints
 .ipynb_checkpoints/
+
+# Environment & config files
+*.env
 .env*/
+*.ini
+*.yaml
+*.yml
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Databases
 *.sqlite
 *.db
-.data/
 
+# Data folders (raw/processed data won't be committed)
+data/
+
+# Models (saved models/weights)
+models/
+
+# VSCode / IDE configs
+.vscode/
+.idea/
