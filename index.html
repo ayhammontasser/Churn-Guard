@@ -1,0 +1,775 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hotel Reservation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+    />
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script
+            src="https://kit.fontawesome.com/6d56012fea.js"
+            crossorigin="anonymous"
+    ></script>
+    <style>
+        .container {
+            font-family: "Montserrat", sans-serif;
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+        }
+        h1{
+            font-weight: 900;
+            font-size: 40px;
+            margin-bottom: 30px;
+        }
+
+        .form-section {
+            width: 70%;
+        }
+
+        .result-section {
+            width: 20%;
+        }
+
+        i {
+            color: #00006e;
+        }
+
+        input[type="number"] {
+            width: 90%;
+            border-radius: 10px;
+            -moz-appearance: textfield;
+        }
+
+        #ans {
+            font-weight: 700;
+            font-size: 28px;
+        }
+
+        .result {
+            font-size: larger;
+        }
+
+        .result-content p {
+            margin-top: 30px;
+        }
+        label {
+            font-weight: 500;
+            font-size: large;
+        }
+
+        input[type="radio"] {
+            margin-right: 20px;
+        }
+        h1{
+            font-weight: 700;
+            font-size: 30px;
+            margin-bottom: 30px;
+        }
+        .btn-primary{
+            margin-top: 20px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body style="background-color: rgba(225,238,255,0.64)">
+<div class="container">
+    <form action="/predict" class="form-group form-section" method="post">
+        <h1>Hotel Reservation Cancellation Prediction <i class="fa-solid fa-hotel"></i></h1>
+        <div class="mb-3">
+            <label for="lead_time" class="form-label"><strong>Lead Time:</strong> <br>(Number of days between the booking date and the arrival date)</label>
+            <input type="number" class="form-control" id="lead_time" required
+                   placeholder="Enter Lead Time" name="lead_time"/>
+        </div>
+        <hr>
+        <div>
+            <label for="avg_price" class="form-label"><strong>Average Price:</strong></label>
+            <input type="number" class="form-control" id="avg_price" required
+                   placeholder="Enter Average Price" name="avg_price"/>
+        </div>
+        <hr>
+        <div class="mb-3">
+            <label for="special_request" class="form-label"><strong>Number of Special Requests:</strong></label>
+            <input type="number" class="form-control" id="special_request" required
+                   placeholder="Enter Number of Special Requests" name="special_request"/>
+        </div>
+        <hr>
+        <div class="mb-3">
+            <label for="year" class="form-label"><strong>Reservation year:</strong></label>
+            <input type="number" class="form-control" id="year" required
+                   placeholder="Enter Reservation Year" name="year"/>
+        </div>
+        <hr>
+        <div>
+            <label class="form-label"><strong>Booking Method:</strong> </label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="method" id="online" value="1">
+                <label class="form-check-label" for="online">Online</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="method" id="onsite" value="0" checked>
+                <label class="form-check-label" for="onsite">Onsite</label>
+            </div>
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <div class="result result-section">
+        <h2>Result <i class="fa-solid fa-scroll"></i></h2>
+        <div class="result-content">
+            <p>Reservation: <br><span id="ans">{{prediction}}</span></p>
+        </div>
+    </div>
+</div>
+</body>
+
+</html> -->
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Churn Prediction</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<body style="background:#f3f5f7;">
+
+<div class="container mt-5">
+
+    <div class="card shadow p-4">
+        <h2 class="text-center mb-4">📊 Telco Customer Churn Prediction</h2>
+
+        <form action="/predict" method="POST">
+
+          
+            <div class="mb-3">
+                <label>Monthly Charges:</label>
+                <input type="number" step="0.01" name="MonthlyCharges" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Total Charges:</label>
+                <input type="number" step="0.01" name="TotalCharges" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Tenure:</label>
+                <input type="number" name="tenure" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Contract Type (0=Month-to-Month, 1=One Year, 2=Two Year):</label>
+                <input type="number" name="Contract" class="form-control" required>
+            </div>
+
+            <button class="btn btn-primary w-100 mt-3">Predict</button>
+
+        </form>
+
+        {% if prediction %}
+        <div class="alert alert-info mt-4 text-center">
+            <h4>Result: {{ prediction }}</h4>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+
+</body>
+</html> -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Churn Prediction</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background:#eef1f5;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .card {
+            margin-top:40px;
+            border-radius: 12px;
+        }
+        .form-control, .form-select {
+            border-radius: 8px;
+        }
+        h2 {
+            color:#2c3e50;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card shadow p-4">
+        <h2 class="text-center mb-4">📊 Telco Customer Churn Prediction</h2>
+
+        <form action="/predict" method="POST">
+
+            <div class="mb-3">
+                <label class="form-label">Monthly Charges:</label>
+                <input type="number" step="0.01" name="MonthlyCharges" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Total Charges:</label>
+                <input type="number" step="0.01" name="TotalCharges" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Tenure (Months):</label>
+                <input type="number" name="tenure" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Contract Type:</label>
+                <select class="form-select" name="Contract_encoded" required>
+                    <option value="0">Month-to-Month</option>
+                    <option value="1">One Year</option>
+                    <option value="2">Two Year</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary w-100 mt-3">Predict</button>
+
+        </form>
+
+        {% if prediction %}
+        <div class="alert alert-info mt-4 text-center">
+            <h4>Result: {{ prediction }}</h4>
+            <p><strong>Churn Probability:</strong> {{ prob|round(3) }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+
+</body>
+</html> -->
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Telco Customer Churn Prediction</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body { background: #eef1f5; font-family: 'Segoe UI', sans-serif; }
+        .card { margin-top: 40px; border-radius: 12px; }
+        .form-control, .form-select { border-radius: 8px; }
+        h2 { color: #2c3e50; }
+        .section-title { font-weight: bold; margin-top: 20px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card shadow p-4">
+        <h2 class="text-center mb-4">📊 Telco Customer Churn Prediction</h2>
+        <form action="/predict" method="POST"> -->
+
+            
+            <!--  <div class="section-title">Charges & Tenure</div>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label>Monthly Charges:</label>
+                    <input type="number" step="0.01" name="MonthlyCharges" class="form-control" required>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Total Charges:</label>
+                    <input type="number" step="0.01" name="TotalCharges" class="form-control" required>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Tenure (months):</label>
+                    <input type="number" name="tenure" class="form-control" required>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Avg Charges:</label>
+                    <input type="number" step="0.01" name="AvgCharges" class="form-control" required>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>CLV:</label>
+                    <input type="number" step="0.01" name="clv" class="form-control" required>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Time to Churn:</label>
+                    <input type="number" name="time_to_churn" class="form-control" required>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Number of Services:</label>
+                    <input type="number" name="NumServices" class="form-control" required>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Campaign Response:</label>
+                    <input type="number" name="CampaignResponse" class="form-control" required>
+                </div>
+            </div>
+
+            Long-term & Senior
+            <div class="section-title">Long-term & Senior</div>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label>Is Long Term Customer:</label>
+                    <select class="form-select" name="is_long_term" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Senior Citizen:</label>
+                    <select class="form-select" name="SeniorCitizen" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+            </div>
+
+            <-- Contract & Payment
+            <div class="section-title">Contract & Payment</div>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label>Contract Type:</label>
+                    <select class="form-select" name="Contract_encoded" required>
+                        <option value="0">Month-to-Month</option>
+                        <option value="1">One Year</option>
+                        <option value="2">Two Year</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Payment Method - Credit Card:</label>
+                    <select class="form-select" name="PaymentMethod_Credit card (automatic)" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Payment Method - Electronic Check:</label>
+                    <select class="form-select" name="PaymentMethod_Electronic check" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Payment Method - Mailed Check:</label>
+                    <select class="form-select" name="PaymentMethod_Mailed check" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+            </div> 
+
+        
+<div class="section-title">Services</div>
+<div class="row">
+    <div class="col-md-3 mb-3">
+        <label>Internet Service - Fiber optic:</label>
+        <select class="form-select" name="InternetService_Fiber optic" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label>Internet Service - None:</label>
+        <select class="form-select" name="InternetService_No" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label>Phone Service:</label>
+        <select class="form-select" name="PhoneService_Yes" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label>Multiple Lines:</label>
+        <select class="form-select" name="MultipleLines_Yes" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label>Online Security:</label>
+        <select class="form-select" name="OnlineSecurity_Yes" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label>Online Backup:</label>
+        <select class="form-select" name="OnlineBackup_Yes" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label>Device Protection:</label>
+        <select class="form-select" name="DeviceProtection_Yes" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label>Tech Support:</label>
+        <select class="form-select" name="TechSupport_Yes" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label>Streaming TV:</label>
+        <select class="form-select" name="StreamingTV_Yes" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label>Streaming Movies:</label>
+        <select class="form-select" name="StreamingMovies_Yes" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label>Paperless Billing:</label>
+        <select class="form-select" name="PaperlessBilling_Yes" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+    </div>
+</div>
+
+
+            <div class="section-title">Customer Segmentation</div>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label>Loyalty Class - Mid:</label>
+                    <select class="form-select" name="LoyaltyClass_Mid" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Loyalty Class - New:</label>
+                    <select class="form-select" name="LoyaltyClass_New" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Loyalty Class - NaN:</label>
+                    <select class="form-select" name="LoyaltyClass_nan" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Revenue Segment - Low:</label>
+                    <select class="form-select" name="RevenueSegment_Low" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Revenue Segment - Medium:</label>
+                    <select class="form-select" name="RevenueSegment_Medium" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>CLV Segment - 1:</label>
+                    <select class="form-select" name="clv_segment_1" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>CLV Segment - 2:</label>
+                    <select class="form-select" name="clv_segment_2" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+            </div>
+
+          
+            <div class="section-title">Demographics</div>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label>Gender - Male:</label>
+                    <select class="form-select" name="gender_Male" required>
+                        <option value="0">Female</option>
+                        <option value="1">Male</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Partner:</label>
+                    <select class="form-select" name="Partner_Yes" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Dependents:</label>
+                    <select class="form-select" name="Dependents_Yes" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="btn btn-primary w-100 mt-3">Predict</button>
+        </form>
+
+        {% if prediction %}
+        <div class="alert alert-info mt-4 text-center">
+            <h4>Result: {{ prediction }}</h4>
+            {% if prob %}
+            <p><strong>Churn Probability:</strong> {{ prob|round(3) }}</p>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Telco Customer Churn Prediction</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <style>
+        body { background: #edf0f5; font-family: 'Segoe UI'; }
+        .card { margin-top: 40px; border-radius: 12px; }
+        .section-title { font-weight: bold; margin-top: 18px; margin-bottom: 10px; }
+        .form-select, .form-control { border-radius: 8px; }
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <div class="card shadow p-4">
+
+        <h2 class="text-center mb-4">📊 Telco Customer Churn Prediction</h2>
+
+        <form action="/predict" method="POST">
+
+           
+            <div class="section-title">Charges & Tenure</div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label>Monthly Charges</label>
+                    <input type="number" step="0.01" class="form-control" name="MonthlyCharges" required>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label>Total Charges</label>
+                    <input type="number" step="0.01" class="form-control" name="TotalCharges" required>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label>Tenure (months)</label>
+                    <input type="number" class="form-control" name="tenure" required>
+                </div>
+            </div>
+
+
+            <div class="section-title">Contract Details</div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label>Contract Type</label>
+                    <select class="form-select" name="Contract_encoded" required>
+                        <option value="0">Month-to-Month</option>
+                        <option value="1">One Year</option>
+                        <option value="2">Two Year</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label>Senior Citizen</label>
+                    <select class="form-select" name="SeniorCitizen" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label>Is Long-Term Customer</label>
+                    <select class="form-select" name="is_long_term" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="section-title">Payment Method</div>
+            <select class="form-select" name="PaymentMethod">
+                <option value="credit">Credit Card (Automatic)</option>
+                <option value="electronic">Electronic Check</option>
+                <option value="mailed">Mailed Check</option>
+            </select>
+
+
+         
+            <div class="section-title">Select Services </div>
+            <select class="form-select" name="Services[]" multiple size="6">
+                <option value="PhoneService_Yes">Phone Service</option>
+                <option value="MultipleLines_Yes">Multiple Lines</option>
+                <option value="OnlineSecurity_Yes">Online Security</option>
+                <option value="OnlineBackup_Yes">Online Backup</option>
+                <option value="DeviceProtection_Yes">Device Protection</option>
+                <option value="TechSupport_Yes">Tech Support</option>
+                <option value="StreamingTV_Yes">Streaming TV</option>
+                <option value="StreamingMovies_Yes">Streaming Movies</option>
+                <option value="PaperlessBilling_Yes">Paperless Billing</option>
+                <option value="InternetService_Fiber optic">Fiber Optic Internet</option>
+                <option value="InternetService_No">No Internet</option>
+            </select>
+
+
+                 
+            <div class="section-title">Customer Segmentation</div>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label>Loyalty Class</label>
+                    <select class="form-select" name="LoyaltyClass">
+                        <option value="Mid">Mid</option>
+                        <option value="New">New</option>
+                        <option value="None">None</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label>Revenue Segment</label>
+                    <select class="form-select" name="RevenueSegment">
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label>CLV Segment</label>
+                    <select class="form-select" name="CLVSegment">
+                        <option value="0">Low</option>
+                        <option value="1">Medium</option>
+                        <option value="2">High</option>
+                    </select>
+                </div>
+            </div>
+
+
+            
+            <div class="section-title">Demographics</div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label>Gender</label>
+                    <select class="form-select" name="gender_Male">
+                        <option value="0">Female</option>
+                        <option value="1">Male</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label>Partner</label>
+                    <select class="form-select" name="Partner_Yes">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label>Dependents</label>
+                    <select class="form-select" name="Dependents_Yes">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <button class="btn btn-primary w-100 mt-3">Predict</button>
+
+        </form>
+
+        {% if prediction %}
+        <div class="alert alert-info text-center mt-4">
+            <h4>{{ prediction }}</h4>
+            <p><strong>Probability:</strong> {{ prob|round(3) }}</p>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
